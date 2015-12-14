@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
-  get "admin/index"
-
-  resources :users
+  devise_for :users
 
   resources :orders
 
@@ -10,22 +8,15 @@ Rails.application.routes.draw do
   resources :carts
 
   get "store/index"
-  get "admin" => 'admin#index'
-  
-  controller :sessions do
-    get 'login' => :new
-    post 'login' => :create
-    delete 'logout' => :destroy
-  end
+
   scope '(:locale)' do
-    resources :users
     resources :orders
     resources :line_items
     resources :carts
     resources :products do
       get :who_bought, :on => :member
     end
-    root :to => 'store#index', :as => 'store'
+    root :to => 'store#index'
   end
 end
   # The priority is based upon order of creation:

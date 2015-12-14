@@ -4,7 +4,7 @@ gem 'rails', '3.2.3'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-
+gem 'devise'
 gem 'sqlite3'
 gem 'prototype-rails', :git => 'git://github.com/rails/prototype-rails.git'
 
