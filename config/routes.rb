@@ -1,4 +1,24 @@
 Rails.application.routes.draw do
+  get "private_account_manager/profile"
+
+  get "private_account_manager/sell"
+
+  get "private_account_manager/chat"
+
+  get "private_account_manager/edit"
+
+  get "private_account_manager/my_orders"
+
+  get "account_manager/create_private"
+
+  get "account_manager/create_business"
+
+  get "account_manager/private"
+
+  get "account_manager/business"
+
+  get "account_manager/account"
+
   devise_for :users
 
   resources :orders

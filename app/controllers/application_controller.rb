@@ -16,8 +16,26 @@ class ApplicationController < ActionController::Base
   protected
   
   def authorize
-    unless User.find_by_id(session[:user_id])
-      redirect_to login_url, :notice => "Please log in!"
+    unless current_user
+      redirect_to new_user_session_path, :notice => "Please log in!"
+    end
+  end
+
+  def authorize_admin
+    unless current_user.admin?
+      redirect_to new_user_session_path, :notice => "Please log in as admin!"
+    end
+  end
+
+  def authorize_private
+    unless current_user.private?
+      redirect_to new_user_session_path, :notice => "Please log in!"
+    end
+  end
+
+  def authorize_business
+    unless current_user.business
+      redirect_to new_user_session_path, :notice => "Please log in!"
     end
   end
 

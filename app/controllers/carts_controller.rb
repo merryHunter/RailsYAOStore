@@ -1,6 +1,8 @@
 class CartsController < ApplicationController
   
-  skip_before_filter :authorize, :only => [:create, :update, :destroy]
+  skip_before_filter :authorize_admin, :only => [:create, :update, :destroy]
+  # TODO: bug: show only own carts history
+  before_filter :authorize,  :only =>[:show]
   # GET /carts
   # GET /carts.json
   def index
@@ -79,12 +81,13 @@ class CartsController < ApplicationController
   # DELETE /carts/1
   # DELETE /carts/1.json
   def destroy
+    logger.debug("BEGIN DESTROY CART")
     @cart = current_cart
     @cart.destroy
     session[:cart_id] = nil
-
+    logger.debug("END DESTROY CART")
     respond_to do |format|
-      format.html { redirect_to store_url}
+      format.html { redirect_to store_index_path}
       format.json { head :no_content }
       format.js
     end

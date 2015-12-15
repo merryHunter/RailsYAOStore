@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Pragprog Books Online Store |</title>
+  <title>YAOS Store </title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
@@ -14,16 +14,18 @@
 	</div>
 	<div id="columns">
 		<div id="side">
+      <!--authorized user section-->
       <% if user_signed_in? %>
-          Logged in as <strong><%= current_user.email %></strong>.
-          <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
-          <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+          <h3 style="color: white">ava<br/> <strong><%= current_user.email %></strong></h3><br/>
+          <%= link_to "Profile", account_manager_account_path%> <br/>
+          <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %><br/>
       <% else %>
-          <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
+          <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> <br/>
           <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
-          
+
       <% end %>
-			<% if @cart %>
+      <!--if user is allowed to buy and cart exist(user logged in) -->
+			<% if @cart && current_user.private? %>
 			<%= hidden_div_if(@cart.line_items.empty?, :id => "cart") do %>
 				<%= render @cart %>
 			<% end %>
@@ -33,15 +35,16 @@
 			<a href="http://www..."><%= t('.news')%> </a><br />
 			<a href="http://www..."><%= t('.contact')%> </a><br />
 			<p style="color:white;"><%= Time.now.month %>/<%= Time.now.day %>/<%= Time.now.year %></p>
-			
-			<% if session[:user_id] %>
+			<!--admin section-->
+			<% if user_signed_in? && current_user.admin? %>
 				<br />
-				<%= link_to "Orders", orders_path %><br />
-				<%= link_to "Products", products_path %><br />
-				<%= link_to "Users", users_path %><br />
-				<br />
-				<%= button_to "Logout", logout_path, :method => :delete %>
+				<%= link_to "Orders", orders_path %><br/>
+				<%= link_to "Products", products_path %><br/>
+				 <%#= link_to "Users",  %> <br />
 				<% end %>
+      <% if session[:user_id] %>
+      <h1>userid</h1>
+      <% end %>
 		</div>
 		<div id="main">
 			<%= yield %>
