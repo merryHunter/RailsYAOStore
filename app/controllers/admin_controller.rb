@@ -10,22 +10,39 @@ class AdminController < ApplicationController
   def accept
     begin
       @r = Request.find_by_id(params[:request_id])
-      @r.accepted = 1
-      @r.viewed = 1
+      @r.accepted = true
+      @r.viewed = true
       @r.save
+      @user = User.find_by_id(@r.user_id)
+      if @r.business
+        @user.business = true
+      elsif @r.private
+        @user.private = true
+      end
+      @user.save
     rescue StandardError => e
       logger.error(e.message)
+      ensure
+    respond_to do |format|
+      format.html { redirect_to admin_account_request_path }
+      format.json { render json: @r, status: :created, location: @r }
+    end
     end
   end
 
   def reject
     begin
       @r = Request.find_by_id(params[:request_id])
-      @r.accepted = 0
-      @r.viewed = 0
+      @r.accepted = false
+      @r.viewed = true
       @r.save
     rescue StandardError => e
       logger.error(e.message)
+    ensure
+      respond_to do |format|
+        format.html { redirect_to admin_account_request_path }
+        format.json { render json: @r, status: :created, location: @r }
+      end
     end
   end
 

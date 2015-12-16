@@ -6,6 +6,14 @@ class AccountManagerController < ApplicationController
   end
 
   def create_private
+    create_request true, false
+  end
+
+  def create_business
+    create_request false, true
+  end
+
+  def create_request private, business
     logger.debug("CREATE PRIVATE")
     if request.post?
       logger.debug("CREATE PRIVATE POST")
@@ -13,7 +21,9 @@ class AccountManagerController < ApplicationController
         @acc_request = Request.new
         logger.debug("REQUEST")
         @acc_request.user_id = current_user.id
-        @acc_request.private = 1
+        @acc_request.private = private
+        @acc_request.business = business
+        @acc_request.viewed = false
         logger.debug("REQUEST")
         respond_to do |format|
           if @acc_request.save
@@ -28,9 +38,7 @@ class AccountManagerController < ApplicationController
         logger.error(e.message)
       end
     end
-  end
 
-  def create_business
   end
 
   def private
