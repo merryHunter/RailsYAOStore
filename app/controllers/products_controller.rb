@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
   # TODO: authorize business???
-  # before_filter :authorize_admin, :init
+  before_filter :init
+  # before_filter :authorize_admin
   skip_before_filter :authorize_business, only: [:create, :update]
 
   # GET /products
@@ -39,6 +40,7 @@ class ProductsController < ApplicationController
   # GET /products/1/edit
   def edit
     @product = Product.find(params[:id])
+    @product.category_id = params[:category_id]
   end
   
   def who_bought
@@ -55,7 +57,7 @@ class ProductsController < ApplicationController
   # POST /products.json
   def create
     @product = Product.new(params[:product])
-    @product.parent = params[:category_id]
+    @product.category_id = params[:category_id]
     respond_to do |format|
       if @product.save
         format.html { redirect_to @product, notice: 'Product was successfully created.' }
@@ -71,9 +73,9 @@ class ProductsController < ApplicationController
   # PUT /products/1.json
   def update
     @product = Product.find(params[:id])
-    @product.parent = params[:category_id]
+    @product.category_id = params[:category_id]
     respond_to do |format|
-      if @product.update_attributes(params[:product])
+      if @product.save
         format.html { redirect_to @product, notice: 'Product was successfully updated.' }
         format.json { head :no_content }
       else
