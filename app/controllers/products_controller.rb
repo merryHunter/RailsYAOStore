@@ -2,7 +2,7 @@ class ProductsController < ApplicationController
   # TODO: authorize business???
   before_filter :init
   # before_filter :authorize_admin
-  skip_before_filter :authorize_business, only: [:create, :update]
+  before_filter :authorize_private or before_filter :authorize_business
 
   # GET /products
   # GET /products.json
