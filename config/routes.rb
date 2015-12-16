@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   get "admin/account_request"
 
+  post "admin/accept"
+
   get "admin/users"
 
   get "admin/banners"
@@ -20,6 +22,7 @@ Rails.application.routes.draw do
   get "account_manager/create_private"
 
   post "account_manager/create_private" => "account_manager#create_private"
+
   get "account_manager/create_business"
 
   get "account_manager/private"

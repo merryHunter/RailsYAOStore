@@ -16,10 +16,12 @@
       </tr>
         <% end %>
       <tr>
-        <td><%#= button_to 'Accept' %></td>
+        <td><%= button_to 'Accept', { controller: :admin, :action => :accept, :request_id => request.id},
+                          { :method => :post} %></td>
       </tr>
       <tr>
-        <td><%#= button_to 'Reject' %></td>
+        <td><%= button_to 'Reject',  { controller: :admin, :action => :reject, :request_id => request.id},
+                          { :method => :post} %></td>
       </tr>
 
 
