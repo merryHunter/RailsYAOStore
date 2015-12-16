@@ -1,0 +1,27 @@
+<h1>Listing category_trees</h1>
+
+<table>
+  <tr>
+    <th>Root</th>
+    <th>Sub category 1</th>
+    <th>Sub category 2</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @category_trees.each do |category_tree| %>
+  <tr>
+    <td><%= category_tree.root_id%> </td>
+    <td><%= category_tree.subone_id%> </td>
+    <td><%= category_tree.subtwo_id%> </td>
+    <td><%= link_to 'Show', category_tree %></td>
+    <td><%= link_to 'Edit', edit_category_tree_path(category_tree) %></td>
+    <td><%= link_to 'Destroy', category_tree, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Category tree', new_category_tree_path %>

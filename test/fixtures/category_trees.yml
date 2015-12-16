@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  root_id: 1
+  subone_id: 1
+  subtwo_id: 1
+
+two:
+  root_id: 1
+  subone_id: 1
+  subtwo_id: 1

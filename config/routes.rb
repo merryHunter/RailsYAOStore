@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :category_trees
+
+  resources :categories
+
   get "admin/news"
 
   get "admin/account_request"
@@ -8,6 +12,8 @@ Rails.application.routes.draw do
   get "admin/users"
 
   get "admin/banners"
+
+  get "admin/categories"
 
   get "private_account_manager/profile"
 

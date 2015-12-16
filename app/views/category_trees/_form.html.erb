@@ -1,0 +1,28 @@
+<%= form_for(@category_tree) do |f| %>
+  <% if @category_tree.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@category_tree.errors.count, "error") %> prohibited this category_tree from being saved:</h2>
+
+      <ul>
+      <% @category_tree.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+    <div class="field">
+      <%= select_tag 'root',
+                     options_from_collection_for_select(@categories_root, 'id', 'title' )
+      %></div>
+    <div class="field">
+      <%= select_tag 'subone',
+                     options_from_collection_for_select(@categories, 'id', 'title' )
+      %></div>
+    <div class="field">
+      <%= select_tag 'subtwo',
+                     options_from_collection_for_select(@categories, 'id', 'title' )
+      %></div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

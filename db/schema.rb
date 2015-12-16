@@ -11,9 +11,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20151216015257) do
+ActiveRecord::Schema.define(:version => 20151216020715) do
 
   create_table "carts", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "categories", :force => true do |t|
+    t.string   "title"
+    t.boolean  "root"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "category_trees", :force => true do |t|
+    t.integer  "root_id"
+    t.integer  "subone_id"
+    t.integer  "subtwo_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -43,6 +58,8 @@ ActiveRecord::Schema.define(:version => 20151216015257) do
     t.decimal  "price",       :precision => 8, :scale => 2
     t.datetime "created_at",                                :null => false
     t.datetime "updated_at",                                :null => false
+    t.integer  "parent"
+    t.integer  "category_id"
   end
 
   create_table "requests", :force => true do |t|
