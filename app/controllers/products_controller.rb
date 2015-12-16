@@ -1,8 +1,7 @@
 class ProductsController < ApplicationController
-  # TODO: authorize business???
   before_filter :init
   # before_filter :authorize_admin
-  before_filter :authorize_private or before_filter :authorize_business
+  before_filter :authorize_private or before_filter :authorize_business or before_filter :authorize_admin
 
   # GET /products
   # GET /products.json
@@ -56,8 +55,17 @@ class ProductsController < ApplicationController
   # POST /products
   # POST /products.json
   def create
+    if  current_user.private?  &&  current_user.count  == 5
+      respond_to do |format|
+        format.html { redirect_to @product, notice: 'You has exceed the limit of 5 products.
+                                                      Upgrade your account to business!' }
+        format.json { render json: @product, status: :created, location: @product }
+      end
+    end
     @product = Product.new(params[:product])
     @product.category_id = params[:category_id]
+    @product.owner_id = current_user.id
+    @product.count += 1
     respond_to do |format|
       if @product.save
         format.html { redirect_to @product, notice: 'Product was successfully created.' }
@@ -74,6 +82,7 @@ class ProductsController < ApplicationController
   def update
     @product = Product.find(params[:id])
     @product.category_id = params[:category_id]
+    @product.owner_id = current_user.id
     respond_to do |format|
       if @product.save
         format.html { redirect_to @product, notice: 'Product was successfully updated.' }
