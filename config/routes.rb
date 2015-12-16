@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  get "admin/news"
+
+  get "admin/account_request"
+
+  get "admin/users"
+
+  get "admin/banners"
+
   get "private_account_manager/profile"
 
   get "private_account_manager/sell"
@@ -11,6 +19,7 @@ Rails.application.routes.draw do
 
   get "account_manager/create_private"
 
+  post "account_manager/create_private" => "account_manager#create_private"
   get "account_manager/create_business"
 
   get "account_manager/private"

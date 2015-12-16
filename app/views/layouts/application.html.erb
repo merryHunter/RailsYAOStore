@@ -40,7 +40,10 @@
 				<br />
 				<%= link_to "Orders", orders_path %><br/>
 				<%= link_to "Products", products_path %><br/>
-				 <%#= link_to "Users",  %> <br />
+				 <%= link_to "Users", admin_users_path %> <br />
+				 <%= link_to "Requests", admin_account_request_path %> <br />
+				 <%= link_to "Banners", admin_banners_path %> <br />
+				 <%= link_to "News", admin_news_path %> <br />
 				<% end %>
       <% if session[:user_id] %>
       <h1>userid</h1>

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  private: false
+  business: false
+  request_date: 2015-12-16
+  payment_details: MyString
+
+two:
+  user_id: 1
+  private: false
+  business: false
+  request_date: 2015-12-16
+  payment_details: MyString

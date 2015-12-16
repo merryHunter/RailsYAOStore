@@ -1,0 +1,27 @@
+<h1>Account requests</h1>
+
+<table>
+  <% @requests.each do |request| %>
+      <tr>
+        <td><%= request.user_id %></td>
+      </tr>
+      <% if request.private %>
+      <tr>
+        <td>Private</td>
+      </tr>
+          <% end %>
+      <tr>
+        <% if request.business %>
+        <td>Business</td>
+      </tr>
+        <% end %>
+      <tr>
+        <td><%#= button_to 'Accept' %></td>
+      </tr>
+      <tr>
+        <td><%#= button_to 'Reject' %></td>
+      </tr>
+
+
+  <% end %>
+</table>
