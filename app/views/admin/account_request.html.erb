@@ -27,3 +27,7 @@
 
   <% end %>
 </table>
+
+<% unless @requests.any? %>
+    <h2>No active requests!</h2>
+<% end %>

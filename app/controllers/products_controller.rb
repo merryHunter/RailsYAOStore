@@ -55,20 +55,27 @@ class ProductsController < ApplicationController
   # POST /products
   # POST /products.json
   def create
-    if  current_user.private?  &&  current_user.count  == 5
+    logger.debug(current_user.count)
+    if  current_user.private?  &&  current_user.count  >= 5
+      logger.debug("EXPIRED USER")
       respond_to do |format|
-        format.html { redirect_to @product, notice: 'You has exceed the limit of 5 products.
+        flash[:notice] = 'You has exceed the limit of 5 products.
+                                                      Upgrade your account to business!'
+        format.html { redirect_to account_manager_account_path, notice: 'You has exceed the limit of 5 products.
                                                       Upgrade your account to business!' }
         format.json { render json: @product, status: :created, location: @product }
       end
+      return
     end
     @product = Product.new(params[:product])
     @product.category_id = params[:category_id]
     @product.owner_id = current_user.id
-    @product.count += 1
+    @user = User.find_by_id(current_user.id)
+    @user.count += 1
+    @user.save
     respond_to do |format|
       if @product.save
-        format.html { redirect_to @product, notice: 'Product was successfully created.' }
+        format.html { redirect_to product_path, notice: 'Product was successfully created.' }
         format.json { render json: @product, status: :created, location: @product }
       else
         format.html { render action: "new" }
@@ -85,7 +92,7 @@ class ProductsController < ApplicationController
     @product.owner_id = current_user.id
     respond_to do |format|
       if @product.save
-        format.html { redirect_to @product, notice: 'Product was successfully updated.' }
+        format.html { redirect_to product_path, notice: 'Product was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

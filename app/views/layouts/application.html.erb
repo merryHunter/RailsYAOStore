@@ -19,6 +19,9 @@
           <h3 style="color: white">ava<br/> <strong><%= current_user.email %></strong></h3><br/>
           <%= link_to "Profile", account_manager_account_path%> <br/>
           <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %><br/>
+          <% if current_user.private? || current_user.business? %>
+          <%= link_to "Products", products_path %><br/>
+              <% end %>
       <% else %>
           <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> <br/>
           <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
