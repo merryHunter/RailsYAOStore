@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :news
+
+  resources :banners
+
   resources :category_trees
 
   resources :categories

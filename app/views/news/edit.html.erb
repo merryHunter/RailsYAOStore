@@ -1,0 +1,11 @@
+<% if current_user.admin? %>
+<h1>Editing news</h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Show', @news %> |
+
+<% else %>
+    <h1>Access denied!</h1>
+<% end %>
+<%= link_to 'Back', news_index_path %>

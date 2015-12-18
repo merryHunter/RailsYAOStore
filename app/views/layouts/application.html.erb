@@ -35,9 +35,10 @@
 			<% end %>
 			<a href="/"><%= t('.home')%> </a><br />
 			<a href="http://www..."><%= t('.questions')%> </a><br />
-			<a href="http://www..."><%= t('.news')%> </a><br />
+			<%= link_to t('.news'), action: "index", controller: :news %> <br />
 			<a href="http://www..."><%= t('.contact')%> </a><br />
 			<p style="color:white;"><%= Time.now.month %>/<%= Time.now.day %>/<%= Time.now.year %></p>
+
 			<!--admin section-->
 			<% if user_signed_in? && current_user.admin? %>
 				<br />
@@ -46,12 +47,16 @@
         <%= link_to "Categories", admin_categories_path  %> <br />
 				 <%= link_to "Users", admin_users_path %> <br />
 				 <%= link_to "Requests", admin_account_request_path %> <br />
-				 <%= link_to "Banners", admin_banners_path %> <br />
-				 <%= link_to "News", admin_news_path %> <br />
+				 <%= link_to "Banners", banners_path %> <br />
 				<% end %>
-      <% if session[:user_id] %>
-      <h1>userid</h1>
-      <% end %>
+      <!----------------->
+      <div class="banners">
+        <% unless current_user && current_user.admin? %>
+          <% @banners.each do |b| %>
+              <%= link_to image_tag(b.image), b.url %>
+          <% end %>
+        <% end %>
+      </div>
 		</div>
 		<div id="main">
 			<%= yield %>

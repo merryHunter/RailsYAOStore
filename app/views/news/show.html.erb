@@ -1,0 +1,13 @@
+
+  <h1>
+  <%= @news.title %>
+    </h1>
+
+<h4>
+  <%= @news.text %>
+</h4>
+
+<% if current_user.admin? %>
+<%= link_to 'Edit', edit_news_path(@news) %>
+      <% end %>
+<%= link_to 'Back', news_index_path %>

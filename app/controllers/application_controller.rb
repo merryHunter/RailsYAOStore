@@ -1,10 +1,14 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :set_i18n_locale_from_params, :authenticate_user!
-
+  before_filter :load_banners
 
   private
-  
+
+  def load_banners
+    @banners = Banner.all
+  end
+
   def current_cart
     Cart.find(session[:cart_id])
   rescue ActiveRecord::RecordNotFound

@@ -1,0 +1,22 @@
+<h1>Listing news</h1>
+
+
+<% @news.each do |news| %>
+
+    <h2><%= news.title %></h2>
+    <h5><%= news.text %></h5>
+
+    <%= link_to 'Show', news %>
+
+    <% if current_user.admin? %>
+        <%= link_to 'Edit', edit_news_path(news) %>
+        <%= link_to 'Destroy', news, confirm: 'Are you sure?', method: :delete %>
+    <% end %>
+<% end %>
+
+<br />
+<br />
+<br />
+<% if current_user.admin? %>
+<%= link_to 'New News', new_news_path %>
+<% end %>
