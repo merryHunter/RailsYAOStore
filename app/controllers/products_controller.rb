@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   before_filter :init
-  before_filter :authenticate_user!
+  before_filter :authorize_private_and_business
 
   # GET /products
   # GET /products.json

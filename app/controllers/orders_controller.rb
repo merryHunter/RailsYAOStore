@@ -1,11 +1,17 @@
 class OrdersController < ApplicationController
   
-  before_filter :authorize_admin
+  before_filter :authorize_private_and_business
   
   # GET /orders
   # GET /orders.json
   def index
-    @orders = Order.paginate :page => params[:page], :order => 'created_at desc', :per_page => 10
+    if current_user.admin?
+      @orders = Order.paginate :page => params[:page], :order => 'created_at desc', :per_page => 10
+    else
+      @orders = Order.where(:customer_id => current_user.id)
+                    .paginate :page => params[:page], :order => 'created_at desc', :per_page => 10
+
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -30,7 +36,7 @@ class OrdersController < ApplicationController
     @cart = current_cart
     
     if @cart.line_items.empty?
-      redirect_to store_url, :notice => "your cart is empty!"
+      redirect_to store_index_url, :notice => "your cart is empty!"
       return
     end
     
@@ -52,13 +58,15 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(params[:order])
     @order.add_line_items_from_cart(current_cart)
-
+    @order.cart_id = current_cart.id
+    @order.customer_id = current_user.id
+    @order.total = current_cart.total_price
     respond_to do |format|
       if @order.save
         Cart.destroy(session[:cart_id])
         session[:cart_id] = nil
         # Notifier.order_received(@order)
-        format.html { redirect_to store_url, notice: 'Thank you for your order!' }
+        format.html { redirect_to store_index_url, notice: 'Thank you for your order!' }
         format.json { render json: @order, status: :created, location: @order }
       else
         format.html { render action: "new" }

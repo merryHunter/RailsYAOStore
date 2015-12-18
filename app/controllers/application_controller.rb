@@ -25,6 +25,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def authorize_private_and_business
+    unless current_user.private? || current_user.business? || current_user.admin?
+      redirect_to store_index_path, :notice => "Please, upgrade your account to private or business!"
+    end
+  end
+
   def authorize_admin
     unless current_user.admin?
       redirect_to new_user_session_path, :notice => "Please log in as admin!"

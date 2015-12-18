@@ -28,21 +28,23 @@
 
       <% end %>
       <!--if user is allowed to buy and cart exist(user logged in) -->
-			<% if @cart && current_user.private? %>
+			<% if @cart && (current_user.private? || current_user.business?) %>
 			<%= hidden_div_if(@cart.line_items.empty?, :id => "cart") do %>
 				<%= render @cart %>
 			<% end %>
 			<% end %>
 			<a href="/"><%= t('.home')%> </a><br />
+      <%= link_to t('.news'), action: "index", controller: :news %> <br />
+      <%= link_to "Orders", orders_path %><br/>
+
 			<a href="http://www..."><%= t('.questions')%> </a><br />
-			<%= link_to t('.news'), action: "index", controller: :news %> <br />
 			<a href="http://www..."><%= t('.contact')%> </a><br />
+
 			<p style="color:white;"><%= Time.now.month %>/<%= Time.now.day %>/<%= Time.now.year %></p>
 
 			<!--admin section-->
 			<% if user_signed_in? && current_user.admin? %>
 				<br />
-				<%= link_to "Orders", orders_path %><br/>
 				<%= link_to "Products", products_path %><br/>
         <%= link_to "Categories", admin_categories_path  %> <br />
 				 <%= link_to "Users", admin_users_path %> <br />
