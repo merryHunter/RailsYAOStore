@@ -1,12 +1,15 @@
 class ProductsController < ApplicationController
   before_filter :init
-  # before_filter :authorize_admin
-  before_filter :authorize_private or before_filter :authorize_business or before_filter :authorize_admin
+  before_filter :authenticate_user!
 
   # GET /products
   # GET /products.json
   def index
-    @products = Product.all
+    if current_user.admin?
+      @products = Product.all
+    else
+      @products = Product.where(owner_id: current_user.id)
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -75,7 +78,7 @@ class ProductsController < ApplicationController
     @user.save
     respond_to do |format|
       if @product.save
-        format.html { redirect_to product_path, notice: 'Product was successfully created.' }
+        format.html { redirect_to products_path, notice: 'Product was successfully created.' }
         format.json { render json: @product, status: :created, location: @product }
       else
         format.html { render action: "new" }
@@ -92,7 +95,7 @@ class ProductsController < ApplicationController
     @product.owner_id = current_user.id
     respond_to do |format|
       if @product.save
-        format.html { redirect_to product_path, notice: 'Product was successfully updated.' }
+        format.html { redirect_to products_path, notice: 'Product was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
