@@ -49,6 +49,8 @@ Rails.application.routes.draw do
 
   get "account_manager/account"
 
+  get "store/seller" => "store#seller"
+
   devise_for :users
 
   resources :orders
