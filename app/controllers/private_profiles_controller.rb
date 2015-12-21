@@ -1,4 +1,5 @@
 class PrivateProfilesController < ApplicationController
+  # before_filter :authorize_private
   # GET /private_profiles
   # GET /private_profiles.json
   def index

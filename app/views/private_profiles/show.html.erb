@@ -7,7 +7,7 @@
 
 <p>
   <b>Image:</b>
-  <%= @private_profile.image %>
+  <%= image_tag(@private_profile.image) %>
 </p>
 
 <p>
@@ -25,6 +25,7 @@
   <%= @private_profile.gender %>
 </p>
 
-
+<% if current_user.private_id == @private_profile.id %>
 <%= link_to 'Edit', edit_private_profile_path(@private_profile) %> |
+    <% end %>
 <%= link_to 'Back', private_profiles_path %>

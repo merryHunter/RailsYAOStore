@@ -17,10 +17,12 @@ class AdminController < ApplicationController
       if @r.business
         @user.business = true
         business = BusinessProfile.new
+        business.save
         @user.business_id = business.id
       elsif @r.private
         @user.private = true
         private = PrivateProfile.new
+        private.save
         @user.private_id = private.id
       end
       @user.save

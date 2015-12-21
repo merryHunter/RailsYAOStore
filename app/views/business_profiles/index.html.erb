@@ -14,16 +14,19 @@
 <% @business_profiles.each do |business_profile| %>
   <tr>
     <td><%= business_profile.name %></td>
-    <td><%= business_profile.image %></td>
+    <td><%= image_tag(business_profile.image) %></td>
     <td><%= business_profile.address %></td>
-    <td><%= business_profile.url %></td>
+    <td><%= link_to business_profile.url %></td>
     <td><%= link_to 'Show', business_profile %></td>
     <td><%= link_to 'Edit', edit_business_profile_path(business_profile) %></td>
+    <% if current_user.admin? %>
     <td><%= link_to 'Destroy', business_profile, confirm: 'Are you sure?', method: :delete %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>
 
 <br />
-
+    <% if current_user.admin? %>
 <%= link_to 'New Business profile', new_business_profile_path %>
+<% end %>

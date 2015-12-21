@@ -15,17 +15,20 @@
 <% @private_profiles.each do |private_profile| %>
   <tr>
     <td><%= private_profile.name %></td>
-    <td><%= private_profile.image %></td>
+    <td><%= image_tag(private_profile.image) %></td>
     <td><%= private_profile.address %></td>
     <td><%= private_profile.age %></td>
     <td><%= private_profile.gender %></td>
     <td><%= link_to 'Show', private_profile %></td>
     <td><%= link_to 'Edit', edit_private_profile_path(private_profile) %></td>
-    <td><%= link_to 'Destroy', private_profile, confirm: 'Are you sure?', method: :delete %></td>
+    <% if current_user.admin? %>
+        <td><%= link_to 'Destroy', private_profile, confirm: 'Are you sure?', method: :delete %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>
 
 <br />
-
+<% if current_user.admin? %>
 <%= link_to 'New Private profile', new_private_profile_path %>
+<% end %>

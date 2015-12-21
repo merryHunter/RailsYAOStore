@@ -7,7 +7,7 @@
 
 <p>
   <b>Image:</b>
-  <%= @business_profile.image %>
+  <%= image_tag(@business_profile.image) %>
 </p>
 
 <p>
@@ -17,9 +17,10 @@
 
 <p>
   <b>Url:</b>
-  <%= @business_profile.url %>
+  <%= link_to @business_profile.url %>
 </p>
 
-
+<% if current_user.business_id == @business_profile.id %>
 <%= link_to 'Edit', edit_business_profile_path(@business_profile) %> |
+    <% end %>
 <%= link_to 'Back', business_profiles_path %>

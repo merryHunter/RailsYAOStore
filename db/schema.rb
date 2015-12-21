@@ -11,13 +11,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20151218041339) do
+ActiveRecord::Schema.define(:version => 20151221042249) do
 
   create_table "banners", :force => true do |t|
     t.string   "image"
     t.string   "url"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "business_profiles", :force => true do |t|
+    t.text     "name",       :limit => 255, :default => "Company"
+    t.text     "image",      :limit => 255, :default => "url/image.png"
+    t.text     "address",    :limit => 255, :default => "address"
+    t.text     "url",        :limit => 255, :default => "url"
+    t.datetime "created_at",                                             :null => false
+    t.datetime "updated_at",                                             :null => false
   end
 
   create_table "carts", :force => true do |t|
@@ -36,6 +45,14 @@ ActiveRecord::Schema.define(:version => 20151218041339) do
     t.integer  "root_id"
     t.integer  "subone_id"
     t.integer  "subtwo_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "chats", :force => true do |t|
+    t.integer  "first_id"
+    t.integer  "second_id"
+    t.text     "message"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -66,6 +83,16 @@ ActiveRecord::Schema.define(:version => 20151218041339) do
     t.integer  "customer_id"
     t.integer  "cart_id"
     t.decimal  "total"
+  end
+
+  create_table "private_profiles", :force => true do |t|
+    t.text     "name",       :limit => 255, :default => "Name"
+    t.text     "image",      :limit => 255, :default => "url/image.png"
+    t.text     "address",    :limit => 255, :default => "address"
+    t.integer  "age",                       :default => 0
+    t.text     "gender",     :limit => 255, :default => "unknown"
+    t.datetime "created_at",                                             :null => false
+    t.datetime "updated_at",                                             :null => false
   end
 
   create_table "products", :force => true do |t|
@@ -108,6 +135,8 @@ ActiveRecord::Schema.define(:version => 20151218041339) do
     t.boolean  "private"
     t.boolean  "business"
     t.integer  "count",                                 :default => 0
+    t.integer  "private_id"
+    t.integer  "business_id"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

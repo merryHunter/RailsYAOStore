@@ -1,4 +1,5 @@
 class BusinessProfilesController < ApplicationController
+  # before_filter :authorize_business
   # GET /business_profiles
   # GET /business_profiles.json
   def index
