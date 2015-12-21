@@ -43,7 +43,9 @@ class BannersController < ApplicationController
   # POST /banners.json
   def create
     @banner = Banner.new(params[:banner])
-
+    logger.debug("UPDATE PRODUCT")
+    logger.debug("UPDATE PRODUCT")
+    logger.debug("UPDATE PRODUCT")
     respond_to do |format|
       if @banner.save
         format.html { redirect_to @banner, notice: 'Banner was successfully created.' }

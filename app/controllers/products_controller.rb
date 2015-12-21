@@ -91,17 +91,16 @@ class ProductsController < ApplicationController
   # PUT /products/1.json
   def update
     @product = Product.find(params[:id])
-    @product.category_id = params[:category_id]
-    @product.owner_id = current_user.id
-    respond_to do |format|
-      if @product.save
+
+    if @product.update_attributes(params[:product])
+      respond_to do |format|
         format.html { redirect_to products_path, notice: 'Product was successfully updated.' }
         format.json { head :no_content }
+        end
       else
         format.html { render action: "edit" }
         format.json { render json: @product.errors, status: :unprocessable_entity }
       end
-    end
   end
 
   # DELETE /products/1
