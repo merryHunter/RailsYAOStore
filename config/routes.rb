@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :business_profiles
+
+  resources :private_profiles
+
   resources :news
 
   resources :banners

@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @business_profile.name %>
+</p>
+
+<p>
+  <b>Image:</b>
+  <%= @business_profile.image %>
+</p>
+
+<p>
+  <b>Address:</b>
+  <%= @business_profile.address %>
+</p>
+
+<p>
+  <b>Url:</b>
+  <%= @business_profile.url %>
+</p>
+
+
+<%= link_to 'Edit', edit_business_profile_path(@business_profile) %> |
+<%= link_to 'Back', business_profiles_path %>

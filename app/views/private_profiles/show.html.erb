@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @private_profile.name %>
+</p>
+
+<p>
+  <b>Image:</b>
+  <%= @private_profile.image %>
+</p>
+
+<p>
+  <b>Address:</b>
+  <%= @private_profile.address %>
+</p>
+
+<p>
+  <b>Age:</b>
+  <%= @private_profile.age %>
+</p>
+
+<p>
+  <b>Gender:</b>
+  <%= @private_profile.gender %>
+</p>
+
+
+<%= link_to 'Edit', edit_private_profile_path(@private_profile) %> |
+<%= link_to 'Back', private_profiles_path %>

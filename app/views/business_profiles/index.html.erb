@@ -1,0 +1,29 @@
+<h1>Listing business_profiles</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Image</th>
+    <th>Address</th>
+    <th>Url</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @business_profiles.each do |business_profile| %>
+  <tr>
+    <td><%= business_profile.name %></td>
+    <td><%= business_profile.image %></td>
+    <td><%= business_profile.address %></td>
+    <td><%= business_profile.url %></td>
+    <td><%= link_to 'Show', business_profile %></td>
+    <td><%= link_to 'Edit', edit_business_profile_path(business_profile) %></td>
+    <td><%= link_to 'Destroy', business_profile, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Business profile', new_business_profile_path %>

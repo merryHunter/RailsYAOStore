@@ -16,8 +16,12 @@ class AdminController < ApplicationController
       @user = User.find_by_id(@r.user_id)
       if @r.business
         @user.business = true
+        business = BusinessProfile.new
+        @user.business_id = business.id
       elsif @r.private
         @user.private = true
+        private = PrivateProfile.new
+        @user.private_id = private.id
       end
       @user.save
     rescue StandardError => e
