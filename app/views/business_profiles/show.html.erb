@@ -19,7 +19,7 @@
   <b>Url:</b>
   <%= link_to @business_profile.url %>
 </p>
-
+<%= render :template => 'products/index' %>
 <% if current_user.business_id == @business_profile.id %>
 <%= link_to 'Edit', edit_business_profile_path(@business_profile) %> |
     <% end %>

@@ -3,7 +3,7 @@ class BusinessProfilesController < ApplicationController
   # GET /business_profiles
   # GET /business_profiles.json
   def index
-    @business_profiles = BusinessProfile.all
+    @business_profiles = BusinessProfile.where(id: current_user.business_id)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -15,7 +15,7 @@ class BusinessProfilesController < ApplicationController
   # GET /business_profiles/1.json
   def show
     @business_profile = BusinessProfile.find(params[:id])
-
+    @products = Product.where(owner_id: @business_profile.id)
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @business_profile }

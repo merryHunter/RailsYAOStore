@@ -11,8 +11,10 @@ class StoreController < ApplicationController
     end
   end
 
+  # TODO:fix logic, private id shadow business id
   def seller
       seller_id = Product.find(params[:product_id]).owner_id
+
       begin
         if PrivateProfile.find_by_id(seller_id)
           redirect_to url_for(:controller => :private_profiles, :action => :show, :id => seller_id)

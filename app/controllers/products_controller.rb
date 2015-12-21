@@ -8,7 +8,12 @@ class ProductsController < ApplicationController
     if current_user.admin?
       @products = Product.all
     else
-      @products = Product.where(owner_id: current_user.id)
+      if current_user.private?
+        @products = Product.where(owner_id: current_user.private_id)
+      elsif current_user.business?
+        @products = Product.where(owner_id: current_user.business_id)
+      end
+
     end
 
     respond_to do |format|
@@ -73,7 +78,7 @@ class ProductsController < ApplicationController
     @product = Product.new(params[:product])
     @product.category_id = params[:category_id]
     if current_user.private?
-        @product.owner_id = current_user.profile_id
+        @product.owner_id = current_user.private_id
     elsif current_user.business?
       @product.owner_id = current_user.business_id
       end
