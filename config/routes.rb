@@ -59,6 +59,8 @@ Rails.application.routes.draw do
 
   resources :carts
 
+  # delete "products/:id" => "products#destroy"
+
   get "store/index"
 
   scope '(:locale)' do

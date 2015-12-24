@@ -26,11 +26,28 @@ class ProductsController < ApplicationController
   # GET /products/1.json
   def show
     @product = Product.find(params[:id])
-
+    logger.debug("DELETE")
+    logger.debug("DELETE")
+    logger.debug("DELETE")
+    logger.debug(params[:delete])
+    if params[:delete]
+      if @product.destroy
+      respond_to do |format|
+        format.html { redirect_to products_url,  notice: "Deleted???" }
+        format.json { head :no_content }
+      end
+      else
+        respond_to do |format|
+          format.html { redirect_to products_url,  notice: "not Deleted!!!" }
+          format.json { head :no_content }
+        end
+        end
+    else
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @product }
     end
+      end
   end
 
   # GET /products/new
@@ -107,7 +124,7 @@ class ProductsController < ApplicationController
         format.json { head :no_content }
         end
       else
-        format.html { render action: "edit" }
+        format.html { render action: "store/index" }
         format.json { render json: @product.errors, status: :unprocessable_entity }
       end
   end
@@ -116,12 +133,24 @@ class ProductsController < ApplicationController
   # DELETE /products/1.json
   def destroy
     @product = Product.find(params[:id])
-    @product.destroy
-
+    logger.debug("DELetE request work")
+    logger.debug("DELetE request work")
+    logger.debug("DELetE request work")
+    logger.debug("DELetE request work")
+    if @product.destroy
+      @user = User.find_by_id(current_user.id)
+      @user.count -= 1
+      @user.save
     respond_to do |format|
-      format.html { redirect_to products_url }
+      format.html { redirect_to products_url, notice: "Deleted!" }
       format.json { head :no_content }
     end
+    else
+      respond_to do |format|
+        format.html { redirect_to products_url, notice: "Not Deleted!" }
+        format.json { head :no_content }
+      end
+      end
   end
 
   private

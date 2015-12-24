@@ -19,7 +19,7 @@ class PrivateProfilesController < ApplicationController
   # GET /private_profiles/1.json
   def show
     @private_profile = PrivateProfile.find(params[:id])
-
+    @products = Product.where(owner_id: @private_profile.id)
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @private_profile }
