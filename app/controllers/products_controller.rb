@@ -117,7 +117,7 @@ class ProductsController < ApplicationController
   # PUT /products/1.json
   def update
     @product = Product.find(params[:id])
-
+    @product.category_id = params[:category_id]
     if @product.update_attributes(params[:product])
       respond_to do |format|
         format.html { redirect_to products_path, notice: 'Product was successfully updated.' }
@@ -156,5 +156,6 @@ class ProductsController < ApplicationController
   private
     def init
       @categories = Category.where(:root => 'f')
+
     end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20151221042249) do
+ActiveRecord::Schema.define(:version => 20151225010152) do
 
   create_table "banners", :force => true do |t|
     t.string   "image"
@@ -49,12 +49,19 @@ ActiveRecord::Schema.define(:version => 20151221042249) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "chats", :force => true do |t|
-    t.integer  "first_id"
-    t.integer  "second_id"
+  create_table "chat_rooms", :force => true do |t|
+    t.integer  "dialog_id"
+    t.integer  "sender_id"
     t.text     "message"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "dialogs", :force => true do |t|
+    t.integer  "sender_id"
+    t.integer  "receiver_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "line_items", :force => true do |t|

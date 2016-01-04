@@ -19,7 +19,10 @@ class CategoryTreesController < ApplicationController
   # GET /category_trees/1.json
   def show
     @category_tree = CategoryTree.find(params[:id])
-
+    logger.debug("SHOW")
+    logger.debug("SHOW")
+    logger.debug("SHOW")
+    logger.debug("SHOW")
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @category_tree }
@@ -66,7 +69,9 @@ class CategoryTreesController < ApplicationController
   # PUT /category_trees/1.json
   def update
     @category_tree = CategoryTree.find(params[:id])
-
+    @category_tree.root_id = params[:root]
+    @category_tree.subone_id = params[:subone]
+    @category_tree.subtwo_id = params[:subtwo]
     respond_to do |format|
       if @category_tree.update_attributes(params[:category_tree])
         format.html { redirect_to @category_tree, notice: 'Category tree was successfully updated.' }
@@ -94,7 +99,11 @@ class CategoryTreesController < ApplicationController
   def init
     @categories_root = Category.where(:root => 't')
     @categories = Category.where(:root => 'f')
-
+    @categories_titles = {}
+    cc = Category.all
+    cc.each do  |c|
+      @categories_titles[c.id] = c.title
+    end
   end
 
 

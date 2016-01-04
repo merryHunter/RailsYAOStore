@@ -46,9 +46,31 @@ class AdminController < ApplicationController
       logger.error(e.message)
     ensure
       respond_to do |format|
-        format.html { redirect_to admin_account_request_path }
+        format.html { redirect_to admin_account_request_path, notice: "Successfully deleted!" }
         format.json { render json: @r, status: :created, location: @r }
       end
+    end
+  end
+
+  def delete_account
+    if params[:private]
+      u = User.find_by_private_id(params[:private])
+      u.private_id = nil
+      u.private = false
+      u.save
+    elsif params[:business]
+      u = User.find_by_business_id(params[:business])
+      u.business_id = nil
+      u.business = false
+      u.save
+    elsif params[:delete_user]
+        User.find(params[:delete_user]).destroy
+    end
+
+    @users = User.all
+    respond_to do |format|
+      format.html { redirect_to admin_users_path }
+      format.json { render json: @users, status: :created, location: @users }
     end
   end
 

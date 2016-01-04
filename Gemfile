@@ -7,6 +7,7 @@ gem 'rails', '3.2.3'
 gem 'devise'
 gem 'sqlite3'
 gem 'prototype-rails', :git => 'git://github.com/rails/prototype-rails.git'
+# gem 'bootstrap-sass', '~> 3.0'
 
 
 # Gems used only for assets and not required

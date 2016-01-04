@@ -1,12 +1,9 @@
 1. Auth profiles
-2. Edit category tree does not work!
-3. index store - add category title!
-4. add delete accounts
-5. category tree show bug!
 6. chat
-7. admin contact
-8. back-up
-9.admin cannot destroy product??? : log :
+7. admin contact / bug
+8. back-up -
+
+9.admin cannot destroy OLD product??? : log :
 '''''Processing by ProductsController#destroy as HTML
   Parameters: {"authenticity_token"=>"fENeEhdv2GydaaQDjqGPiS/sHgxdsGjy73EV2m3Fz7s=", "locale"=>"en", "id"=>"12"}
   User Load (0.3ms)  SELECT "users".* FROM "users" WHERE "users"."id" = 5 LIMIT 1

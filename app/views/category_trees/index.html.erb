@@ -12,10 +12,10 @@
 
 <% @category_trees.each do |category_tree| %>
   <tr>
-    <td><%= category_tree.root_id%> </td>
-    <td><%= category_tree.subone_id%> </td>
-    <td><%= category_tree.subtwo_id%> </td>
-    <td><%= link_to 'Show', category_tree %></td>
+    <td><%= @categories_titles[category_tree.root_id] %> </td>
+    <td><%= @categories_titles[category_tree.subone_id]%> </td>
+    <td><%= @categories_titles[category_tree.subtwo_id]%> </td>
+    <td><%#= link_to 'Show', category_tree %></td>
     <td><%= link_to 'Edit', edit_category_tree_path(category_tree) %></td>
     <td><%= link_to 'Destroy', category_tree, confirm: 'Are you sure?', method: :delete %></td>
   </tr>

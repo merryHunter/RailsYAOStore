@@ -1,8 +1,30 @@
 <h1>Users</h1>
 <table>
+  <th>Email</th>
+  <th>User</th>
+  <th>Private</th>
+  <th>Business</th>
 <% @users.each do |user| %>
     <tr>
       <td><%= user.email %></td>
+      <td><%= button_to 'Delete USER',
+                       action: "delete_account",
+                       :delete_user => user.id,
+                       :method => :post %></td>
+      <% if user.private_id %>
+          <td><%= button_to 'Delete private account',
+                  action: "delete_account",
+                  :private => user.private_id,
+                            :method => :post%></td>
+      <% end %>
+
+      <% if user.business_id %>
+          <td><%= button_to 'Delete business account',
+                      action: "delete_account",
+                      :business => user.business_id,
+                            :method => :post%></td>
+
+      <% end %>
     </tr>
 <% end %>
 </table>

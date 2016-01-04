@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get "chat/index"
+
   resources :business_profiles
 
   resources :private_profiles
@@ -11,6 +13,12 @@ Rails.application.routes.draw do
 
   resources :categories
 
+  get "store/chat" => "store#chat"
+
+  get "chat/index" => "chat#index"
+
+  post "chat/index" => "chat#new"
+
   get "admin/news"
 
   get "admin/account_request"
@@ -20,6 +28,8 @@ Rails.application.routes.draw do
   post "admin/reject"
 
   get "admin/users"
+
+  post "admin/users" => "admin#delete_account"
 
   get "admin/banners"
 
