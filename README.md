@@ -1,4 +1,5 @@
 Online store
+Written over baseline code provided in book Agile Web Development with Rails, 4th Edition, Rails 3.2 (The Pragmatic Programmers) written by Ruby S., Thomas D., Heinemeier Hansson D., 2011
 
 Administrator has following access rights:
   - Accept, Delete user accounts
